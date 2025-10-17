@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Private Video Access</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      background: #f7f7f7;
+    }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      width: 340px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+    video {
+      width: 100%;
+      max-height: 60vh;
+      border-radius: 10px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Enter Password</h2>
+    <input id="pwd" type="password" placeholder="Password">
+    <button id="ok">Submit</button>
+    <p id="msg" style="color:red;"></p>
+
+    <div id="videoWrap" style="display:none;">
+      <video id="player" controls controlsList="nodownload">
+        <source src="https://drive.google.com/uc?export=download&id=1xL_xAn1GZ_bSKw5XmiKlkt17d7vv3MXX" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+<script>
+  // 🔒 Set your password here
+  const CORRECT = "8143631470";  
+
+  document.getElementById('ok').addEventListener('click', ()=>{
+    const v = document.getElementById('pwd').value;
+    if (v === CORRECT) {
+      document.getElementById('msg').textContent = '';
+      document.getElementById('videoWrap').style.display = 'block';
+      const player = document.getElementById('player');
+      player.play().catch(()=>{});
+    } else {
+      document.getElementById('msg').textContent = 'Incorrect password.';
+    }
+  });
+</script>
+</body>
+</html>
